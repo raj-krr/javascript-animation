@@ -2,63 +2,65 @@ console.log("hello");
 var canvas = document.getElementById('demo');
 canvas.height = window.innerHeight ;
 canvas.width = window.innerWidth ;
-
 const ctx = canvas.getContext('2d');
 
 
 
 
-var x = Math.random() *innerWidth ;
-var y=Math.random() *innerHeight;
-var dx =(Math.random()-0.5) *8;
-var dy = (Math.random()-0.5) *8;
-var radius=30;
+
+
+function circle(x,y,dx,dy,radius){
+ this.x =x;
+ this.y = y;
+this.dx = dx;
+this.dy = dy;
+this.radius = radius;
+
+ this.draw = function(){
+ctx.beginPath();
+ctx.arc(this.x,this.y,this.radius ,0,Math.PI*2,false);
+ctx.strokeStyle ="red";
+ctx.stroke();
+ }
+ this.update = function(){
+    if(this.x + this.radius >innerWidth || this.x-this.radius <0){
+    this.dx=-this.dx ;
+}
+if(this.y+this.radius >innerHeight || this.y-this.radius<0 ){
+    this.dy=-this.dy;
+}
+this.x += this.dx ;
+ this.y += this.dy;
+
+ this.draw();
+    }
+ }
+
+
+ var circleArray = [];
+ for(var i=0 ;i< 100 ;i++){
+    var x = Math.random() * (innerWidth-2*radius)+radius;
+    var y =Math.random() *innerHeight ;
+    var dx =(Math.random()-0.5);
+    var dy= (Math.random()-0.5);
+    var radius =30;
+    circleArray.push(new circle(x,y,dx,dy,radius))
+ }
+
+var circle = new circle(200,200,3,3 ,30);
+
+
+
 function animate(){
     requestAnimationFrame(animate);
          ctx.clearRect(0,0,innerWidth,innerHeight);
+         circle.update();
 
-        ctx.beginPath();
-ctx.arc(x, y, radius, 0, Math.PI * 2, false);
-ctx.strokeStyle = 'red';
-ctx.stroke();
+        for(var i=0 ; i<circleArray.length ;i++){
+            circleArray[i].update();
+        }
  
-if(x+ radius >innerWidth || x-radius <0){
-    dx=-dx ;
-}
-if(y+radius >innerHeight || y-radius<0 ){
-    dy=-dy;
-}
-x+=dx ;
- y+=dy;
+
     }
-
 animate();
-
-// for (var i = 0; i < 34; i++) {
-//     var x=Math.random() * window.innerWidth;
-    
-//     var y=Math.random() * window.innerHeight;
-//     ctx.fillStyle = 'red';
-//     ctx.beginPath();
-//     ctx.arc(x,y , 50, 0, Math.PI * 2, false);
-//     // ctx.strokeStyle = 'green';
-   
-
-//     ctx.stroke();
-
-// }
-
-// for(let i=0 ; i<34 ; i++){
-//     var x=Math.random() * window.innerWidth;
-    
-//     var y=Math.random() * window.innerHeight;
-//     var z=Math.random() * window.innerWidth;
-    
-//     var a=Math.random() * window.innerHeight;
-    
-//     ctx.moveTo(z,a);
-//     ctx.lineTo(x,y);
-   
-//  ctx.stroke();
-// }
 

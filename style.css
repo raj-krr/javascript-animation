@@ -4,12 +4,7 @@ body{
 }
 #demo{
     border: 2px solid black;
-    border-radius: 25px;
-    height: 40vh;
-    width: 40vw;
-    margin: 10vh 10vw;
-    box-shadow: 0 0 -15px 20px rgba(231, 47, 47, 0.5);
-   background: black;
+
 
 
 }

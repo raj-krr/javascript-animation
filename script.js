@@ -24,16 +24,19 @@ function circle(x,y,dx,dy,radius){
  this.y = y;
 this.dx = dx;
 this.dy = dy;
-this.radius = radius;
-this.color =`rgba(${Math.random()*255},${Math.random()*255},${Math.random()*255},${Math.random()
-})`;
+ this.radius = radius;
+// this.color =`rgba(${Math.random()*255},${Math.random()*255},${Math.random()*255},${0.9
+// })`;
 
  this.draw = function(){
 ctx.beginPath();
 ctx.arc(this.x,this.y,this.radius ,0,Math.PI*2,false);
-ctx.fillStyle = this.color;
+ctx.fillStyle ="rgba(231, 218, 28, 1)";
+ctx.shadowBlur =10;
+ctx.shadowColor = 'rgba(202, 117, 14, 1)';
 ctx.stroke();
 ctx.fill();
+
  }
  this.update = function(){
     if(this.x + this.radius >innerWidth || this.x-this.radius <0){
@@ -78,6 +81,7 @@ else if(this.radius>minRadius){
 
 function animate(){
     requestAnimationFrame(animate);
+    ctx.fillStyle='rgba(0,0,0,0.1)';
          ctx.clearRect(0,0,innerWidth,innerHeight);
          
 
